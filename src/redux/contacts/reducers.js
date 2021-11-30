@@ -1,6 +1,6 @@
 import { createReducer, createSlice } from "@reduxjs/toolkit";
-import {changeFilter} from './actions';
-//import * as contactsActions from "./actions";
+import { changeFilter } from "./actions";
+
 import { getThunkData, addThunkData, deleteThunkData } from "./operations";
 
 export const contactSlice = createSlice({
@@ -17,8 +17,7 @@ export const contactSlice = createSlice({
       return {
         ...state,
         contact: action.payload,
-        //  [...state.contact, ...action.payload],
-         loading: false,
+        loading: false,
       };
     },
     [getThunkData.rejected]: (state, action) => {
@@ -38,7 +37,7 @@ export const contactSlice = createSlice({
     [addThunkData.fulfilled]: (state, action) => {
       return {
         ...state,
-        contact: [...state.contact, ...action.payload],
+        contact: [action.payload, ...state.contact],
         loading: false,
       };
     },
@@ -59,7 +58,7 @@ export const contactSlice = createSlice({
     [deleteThunkData.fulfilled]: (state, action) => {
       return {
         ...state,
-        contact: state.contact.filter(({id}) => id !== action.payload),
+        contact: state.contact.filter(({ id }) => id !== action.payload),
         loading: false,
       };
     },
@@ -76,47 +75,5 @@ export const contactSlice = createSlice({
 export default contactSlice.reducer;
 
 export const contactFilter = createReducer("", {
-   [changeFilter]: (_, { payload }) => payload,
+  [changeFilter]: (_, { payload }) => payload,
 });
-
-// export const contacts = createReducer([], {
-//   [getThunkData.fulfilled] : (state, action) =>  {
-//     return [...state, ...action.payload];
-//   },
-// });
-
-// export const loading = createReducer(false, {
-//   [getThunkData.pending]: (_, action) => true,
-//   [getThunkData.fulfilled]: (_, action) => false,
-//   [getThunkData.rejected]: (_, action) => false,
-// })
-
-// export const error = createReducer(null, {
-//   [getThunkData.rejected] : (_, action) =>  action.payload,
-// })
-
-//const initialState = [];
-
-// const contactList = (state = initialState, action) => {
-//   switch (action.type) {
-//     case "contact/add":
-//       return [...state, action.payload];
-
-//       case "contact/delete":
-//       return state.filter(contact => contact.id !== action.payload.id);
-
-//     default:
-//       return state;
-//   }
-// };
-
-// export const contactList = createReducer(initialState, {
-//   "contact/add": (state, { payload }) => [...state, payload],
-//   "contact/delete": (state, { payload }) =>
-//     state.filter((contact) => contact.id !== payload),
-// });
-
-
-// const contactFilter = (state = "", action) => {
-//   return state;
-// };

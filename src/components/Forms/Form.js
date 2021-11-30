@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import s from "../Forms/Form.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,14 +11,6 @@ export default function Form() {
   const prodIdNumber = uuidv4();
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
-
-  // const [contacts, setContacts] = useState(() => {
-  //   return JSON.parse(localStorage.getItem("contacts")) ?? [];
-  // });
-
-  // useEffect(() => {
-  //   window.localStorage.setItem("contacts", JSON.stringify(contacts));
-  // }, [contacts]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
